@@ -1,19 +1,61 @@
-import { useRouter } from "next/router";
 import React from "react";
 import style from "./[id].module.css";
-import movieData from "@/mock/dummy.json";
-import { MovieData } from "@/types";
+import fetchOneMovie from "@/lib/fetch-one-movie";
+import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
+import SEO from "@/components/SEO";
+import { useRouter } from "next/router";
 
-const Page = () => {
+export const getStaticPaths = () => {
+  return {
+    paths: [
+      { params: { id: "1" } },
+      { params: { id: "2" } },
+      { params: { id: "3" } },
+      { params: { id: "4" } },
+      { params: { id: "5" } },
+      { params: { id: "6" } },
+      { params: { id: "7" } },
+      { params: { id: "8" } },
+      { params: { id: "9" } },
+      { params: { id: "10" } },
+      { params: { id: "11" } },
+      { params: { id: "12" } },
+      { params: { id: "13" } },
+      { params: { id: "14" } },
+      { params: { id: "15" } },
+      { params: { id: "16" } },
+      { params: { id: "17" } },
+      { params: { id: "18" } },
+    ],
+    fallback: true,
+  };
+};
+
+export const getStaticProps = async (context: GetStaticPropsContext) => {
+  const id = context.params!.id;
+  const movie = await fetchOneMovie(Number(id));
+
+  return {
+    props: {
+      movie,
+    },
+  };
+};
+
+const Page = ({ movie }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
-  const { id } = router.query;
 
-  const movie: MovieData | undefined | null = movieData.find(
-    (movie) => movie.id === Number(id),
-  );
+  if (router.isFallback) {
+    return (
+      <>
+        <SEO />
+        <h3 style={{ color: "white" }}>영화 데이터 불러오는 중...</h3>
+      </>
+    );
+  }
 
-  if (!movie) {
-    return <div>해당 영화를 찾을 수 없습니다.</div>;
+  if (!movie || movie === null) {
+    return <h3 style={{ color: "white" }}>해당 영화를 찾을 수 없습니다.</h3>;
   }
 
   const {
@@ -28,21 +70,25 @@ const Page = () => {
   } = movie;
 
   return (
-    <div className={style.container}>
-      <div
-        className={style.cover_img_container}
-        style={{ backgroundImage: `url('${posterImgUrl}')` }}
-      >
-        <img src={posterImgUrl} />
+    <>
+      <SEO image={posterImgUrl} title={title} description={description}></SEO>
+      <div className={style.container}>
+        <div
+          className={style.cover_img_container}
+          style={{ backgroundImage: `url('${posterImgUrl}')` }}
+        >
+          <img src={posterImgUrl} />
+        </div>
+        <div className={style.title}>{title}</div>
+        <div className={style.information}>
+          {releaseDate} / {genres.map((genre) => genre).join(", ")} / {runtime}
+          분
+        </div>
+        <div className={style.information}>{company}</div>
+        <div className={style.subTitle}>{subTitle}</div>
+        <div className={style.description}>{description}</div>
       </div>
-      <div className={style.title}>{title}</div>
-      <div className={style.information}>
-        {releaseDate} / {genres.map((genre) => genre).join(", ")} / {runtime}분
-      </div>
-      <div className={style.information}>{company}</div>
-      <div className={style.subTitle}>{subTitle}</div>
-      <div className={style.description}>{description}</div>
-    </div>
+    </>
   );
 };
 

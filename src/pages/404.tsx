@@ -1,7 +1,13 @@
+import SEO from "@/components/SEO";
 import React from "react";
 
 const Page = () => {
-  return <div>Page Not Found</div>;
+  return (
+    <>
+      <SEO />
+      <div style={{ color: "white" }}>Page Not Found</div>
+    </>
+  );
 };
 
 export default Page;

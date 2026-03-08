@@ -8,4 +8,5 @@ export interface MovieData {
   company: string;
   releaseDate: string;
   posterImgUrl: string;
+  useAnimation?: boolean;
 }
