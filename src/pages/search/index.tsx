@@ -10,7 +10,7 @@ const Page = () => {
   const query = router.query.q as string;
 
   const filteredMovies = movies.filter((movie) =>
-    movie.title.toLowerCase().includes(query.toLowerCase()),
+    movie.title?.toLowerCase().includes(query?.toLowerCase()),
   );
 
   return (
