@@ -1,40 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🎬 Onebite Cinema
 
-## Getting Started
+한입 챌린지 8기 **Next.js 2주차 프로젝트**  
+영화 데이터를 조회하고 검색할 수 있는 **영화 정보 웹 서비스**입니다.
 
-First, run the development server:
+프론트엔드는 **Next.js**로 구현되었으며, 백엔드 서버와 연동하여 실제 데이터를 기반으로 동작합니다.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 배포 링크 (Vercel)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+https://your-vercel-url.vercel.app
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## 📌 주요 기능
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### 1. Home (/)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- 백엔드 서버에서 영화 데이터를 불러와 렌더링
+- **추천 영화 섹션**
+  - 랜덤 영화 3개 표시
+  - **3초마다 자동 변경**
+- **전체 영화 목록**
+  - 데이터베이스의 모든 영화 출력
+- 페이지 캐싱 적용
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### 2. Search (/search?q=검색어)
 
-## Learn More
+- 영화 제목 검색 기능
+- 검색 결과 **CSR 방식 데이터 페칭**
+- 검색어 기반 영화 리스트 렌더링
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Movie Detail (/movie/[id])
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- 영화 상세 정보 조회
+- 백엔드 API로부터 데이터 요청
+- **모든 영화 페이지 캐싱 적용**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### 4. SEO 설정
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- favicon 설정
+- Open Graph 메타 태그 적용
+- 썸네일 이미지 설정
