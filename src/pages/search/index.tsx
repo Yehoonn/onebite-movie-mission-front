@@ -33,13 +33,16 @@ const Page = () => {
 
   if (loading) {
     return (
-      <h3 style={{ color: "white", marginTop: "60px" }}>영화 검색 중...</h3>
+      <>
+        <SEO title="한입 시네마 - 영화 검색"></SEO>
+        <h3 style={{ color: "white", marginTop: "60px" }}>영화 검색 중...</h3>
+      </>
     );
   }
 
   return (
     <>
-      <SEO title="한입 시네마 - 영화 검색 결과"></SEO>
+      <SEO title="한입 시네마 - 영화 검색"></SEO>
       <div
         style={{
           display: "grid",

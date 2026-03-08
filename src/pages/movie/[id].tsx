@@ -55,7 +55,12 @@ const Page = ({ movie }: InferGetStaticPropsType<typeof getStaticProps>) => {
   }
 
   if (!movie || movie === null) {
-    return <h3 style={{ color: "white" }}>해당 영화를 찾을 수 없습니다.</h3>;
+    return (
+      <>
+        <SEO />
+        <h3 style={{ color: "white" }}>해당 영화를 찾을 수 없습니다.</h3>
+      </>
+    );
   }
 
   const {
