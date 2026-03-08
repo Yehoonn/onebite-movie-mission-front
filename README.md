@@ -7,7 +7,7 @@
 
 ## 🚀 배포 링크 (Vercel)
 
-https://your-vercel-url.vercel.app
+https://onebite-movie-mission-front-git-main-kyhs-projects.vercel.app/
 
 ## 📌 주요 기능
 
