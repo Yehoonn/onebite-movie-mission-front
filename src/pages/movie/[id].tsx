@@ -4,29 +4,17 @@ import fetchOneMovie from "@/lib/fetch-one-movie";
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import SEO from "@/components/SEO";
 import { useRouter } from "next/router";
+import fetchMovies from "@/lib/fetch-movies";
 
-export const getStaticPaths = () => {
+export const getStaticPaths = async () => {
+  const movies = await fetchMovies();
+
+  const paths = movies.map((movie) => ({
+    params: { id: String(movie.id) },
+  }));
+
   return {
-    paths: [
-      { params: { id: "1" } },
-      { params: { id: "2" } },
-      { params: { id: "3" } },
-      { params: { id: "4" } },
-      { params: { id: "5" } },
-      { params: { id: "6" } },
-      { params: { id: "7" } },
-      { params: { id: "8" } },
-      { params: { id: "9" } },
-      { params: { id: "10" } },
-      { params: { id: "11" } },
-      { params: { id: "12" } },
-      { params: { id: "13" } },
-      { params: { id: "14" } },
-      { params: { id: "15" } },
-      { params: { id: "16" } },
-      { params: { id: "17" } },
-      { params: { id: "18" } },
-    ],
+    paths: paths,
     fallback: true,
   };
 };
@@ -34,6 +22,12 @@ export const getStaticPaths = () => {
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const id = context.params!.id;
   const movie = await fetchOneMovie(Number(id));
+
+  if (!movie) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
